@@ -19,12 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/get_todos',[TodoController::class,'index']);
+Route::get('',[TodoController::class,]);
 
-Route::post('/add_todo',[TodoController::class,'store']);
+Route::post('',[,'store']);
 
-Route::put('/update_todo/{id}',[TodoController::class,'update']);
+('/update_todo/{id}',[,'update']);
 
-Route::delete('/delete_todo/{id}',[TodoController::class,'destroy']);
+
 
 
