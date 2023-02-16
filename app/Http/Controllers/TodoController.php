@@ -19,7 +19,7 @@ class TodoController extends Controller
         $todos = Todo::select('id','description','created_at')->get();
 
         foreach($todos as $todo){
-            $createdsplit = explode(" ",$todo->created_at);
+            
             $todo['time'] = $createdsplit[1];
             $todo['date'] = $createdsplit[0];
             unset($todo['created_at']);
@@ -49,9 +49,7 @@ class TodoController extends Controller
     {
         //
         Log::channel('stderr')->info('received store request');
-        $todo = json_decode($request->getContent(),true);
-        Todo::create($todo);
-
+        
         return response()->json(['info'=>'ok'],200);
     }
 
@@ -89,9 +87,7 @@ class TodoController extends Controller
         //
         Log::channel('stderr')->info('received update request');
         Log::channel('stderr')->info('received id:',[$id]);
-        $todo = json_decode($request->getContent(),true);
-        $updated = Todo::where('id',$id)->update($todo);
-
+        
         if($updated){
             return response()->json(['info'=>true],200);
         }
@@ -107,8 +103,7 @@ class TodoController extends Controller
     {
         //
         Log::channel('stderr')->info("deleted product:",['id'=>$id]);
-        $deleted = Todo::where('id',$id)->delete();
-
+        
         if($deleted){
             return response()->json(['info'=>true],200);
         }
